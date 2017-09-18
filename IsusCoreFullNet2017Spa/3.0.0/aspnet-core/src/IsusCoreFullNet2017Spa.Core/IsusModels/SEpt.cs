@@ -10,7 +10,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
             FStudyProgramsContent = new HashSet<FStudyProgramContent>();
         }
 
-        public int AuthorId { get; set; }
+        public long AuthorId { get; set; }
         public string Name { get; set; }
         public int ActivityId { get; set; }
         public string Grades { get; set; }

@@ -7,7 +7,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
     {
         public DateTime EduDate { get; set; }
         public int LessonVolume { get; set; }
-        public int PupilId { get; set; }
+        public long PupilId { get; set; }
         public int ActivityId { get; set; }
         public int MarktypeId { get; set; }
         public int MarkValue { get; set; }

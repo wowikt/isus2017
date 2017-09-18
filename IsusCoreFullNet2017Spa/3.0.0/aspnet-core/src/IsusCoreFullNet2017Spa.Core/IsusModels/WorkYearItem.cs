@@ -11,6 +11,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
             F = new HashSet<Fact>();
             WorkYearsGroupsBasic = new HashSet<WorkYearGroupBasic>();
             WorkYearsMarkTypes = new HashSet<WorkYearMarkType>();
+            IsusUsers = new HashSet<IsusUser>();
         }
 
         public int WorkYear { get; set; }
@@ -24,5 +25,6 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public ICollection<Fact> F { get; set; }
         public ICollection<WorkYearGroupBasic> WorkYearsGroupsBasic { get; set; }
         public ICollection<WorkYearMarkType> WorkYearsMarkTypes { get; set; }
+        public ICollection<IsusUser> IsusUsers { get; set; }
     }
 }

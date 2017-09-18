@@ -13,7 +13,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         }
 
         public string Session { get; set; }
-        public int UserId { get; set; }
+        public long UserId { get; set; }
         public int ActiveWorkYear { get; set; }
         public DateTime LoginTime { get; set; }
 

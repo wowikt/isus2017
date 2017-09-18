@@ -11,8 +11,8 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public double Hours { get; set; }
         public int? BasicGroupId { get; set; }
         public int? ExtraGroupId { get; set; }
-        public int TeacherId { get; set; }
-        public int MetodistId { get; set; }
+        public long TeacherId { get; set; }
+        public long MetodistId { get; set; }
 
         public SActivity Activity { get; set; }
         public FGroupExtraItem Extragroup { get; set; }

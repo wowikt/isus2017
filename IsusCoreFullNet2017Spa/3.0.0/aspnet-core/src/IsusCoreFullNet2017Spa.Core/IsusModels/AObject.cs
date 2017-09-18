@@ -25,9 +25,9 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public string Data { get; set; }
         public int ObjectTypeId { get; set; }
         public int ObjectStateId { get; set; }
-        public int CreatorId { get; set; }
-        public int? ExpertId { get; set; }
-        public int? AuthorId { get; set; }
+        public long CreatorId { get; set; }
+        public long? ExpertId { get; set; }
+        public long? AuthorId { get; set; }
         public string LockerSession { get; set; }
         public bool? IsAutoNum { get; set; }
         public bool? IsEmpty { get; set; }

@@ -671,7 +671,7 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
 
                 entity.ToTable("F_Education_CUD");
 
-                entity.HasIndex(e => new { Uid = e.Id, e.ActivityId, e.ProgOptId, e.CudText, e.PupilId })
+                entity.HasIndex(e => new { Uid = e.Id, e.ActivityId, ProgOptId = e.ProgEptId, e.CudText, e.PupilId })
                     .HasName("IX_FEducationCUD_PupilId");
 
                 entity.Property(e => e.Id)
@@ -683,7 +683,7 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
                 entity.Property(e => e.CudText)
                     .HasColumnName("cud_text");
 
-                entity.Property(e => e.ProgOptId).HasColumnName("prog_opt_id");
+                entity.Property(e => e.ProgEptId).HasColumnName("prog_opt_id");
 
                 entity.Property(e => e.PupilId).HasColumnName("pupil_id");
 
@@ -695,7 +695,7 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
 
                 entity.HasOne(d => d.ProgOpt)
                     .WithMany(p => p.FEducationCud)
-                    .HasForeignKey(d => d.ProgOptId)
+                    .HasForeignKey(d => d.ProgEptId)
                     .OnDelete(DeleteBehavior.Restrict)
                     .HasConstraintName("FK_F_Education_CUD_F_StudyPrograms_Content");
 
@@ -1620,11 +1620,11 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
 
                 entity.Property(e => e.Name)
                     .IsRequired()
-                    .HasColumnType("string");
+                    .HasMaxLength(500);
 
                 entity.Property(e => e.ShortName)
                     .IsRequired()
-                    .HasColumnType("shortstring");
+                    .HasMaxLength(50);
             });
 
             modelBuilder.Entity<SiteDocument>(entity =>
@@ -1656,7 +1656,7 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
 
                 entity.Property(e => e.Grades)
                     .HasColumnName("grades")
-                    .HasColumnType("shortstring")
+                    .HasMaxLength(50)
                     .HasDefaultValueSql("('')");
 
                 entity.Property(e => e.Hours).HasColumnName("hours");
@@ -1811,6 +1811,13 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
                 entity.Property(e => e.SurplusKlassId).HasColumnName("surplus_klass_id");
 
                 entity.Property(e => e.Tmp).HasColumnName("tmp");
+
+                entity.HasOne(d => d.WorkYearItem)
+                    .WithMany(p => p.IsusUsers)
+                    .HasForeignKey(d => d.WorkYear)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Users_WorkYears");
+
             });
 
             modelBuilder.Entity<UserOrganizer>(entity =>
@@ -1837,6 +1844,12 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
                     .HasMaxLength(50);
 
                 entity.Property(e => e.UserId).HasColumnName("user_id");
+
+                entity.HasOne(d => d.IsusUser)
+                    .WithMany(p => p.UserOrganizers)
+                    .HasForeignKey(d => d.UserId)
+                    .OnDelete(DeleteBehavior.Restrict)
+                    .HasConstraintName("FK_Users_Organizer_Users");
             });
 
             modelBuilder.Entity<UserParentship>(entity =>

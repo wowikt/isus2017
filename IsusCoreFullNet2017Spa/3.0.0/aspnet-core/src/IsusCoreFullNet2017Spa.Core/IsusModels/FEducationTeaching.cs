@@ -10,7 +10,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public int ActivityId { get; set; }
         public int? BasicgroupId { get; set; }
         public int? ExtragroupId { get; set; }
-        public int TeacherId { get; set; }
+        public long TeacherId { get; set; }
         public int Essay { get; set; }
         public string Topic { get; set; }
         public string Homework { get; set; }

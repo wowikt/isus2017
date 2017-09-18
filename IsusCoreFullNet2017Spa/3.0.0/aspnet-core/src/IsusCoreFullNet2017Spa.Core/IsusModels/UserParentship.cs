@@ -4,8 +4,8 @@ namespace IsusCoreFullNet2017Spa.IsusModels
 {
     public partial class UserParentship : Entity
     {
-        public int ParentId { get; set; }
-        public int ChildId { get; set; }
+        public long ParentId { get; set; }
+        public long ChildId { get; set; }
         public string RoleName { get; set; }
         public string RoleDescr { get; set; }
 

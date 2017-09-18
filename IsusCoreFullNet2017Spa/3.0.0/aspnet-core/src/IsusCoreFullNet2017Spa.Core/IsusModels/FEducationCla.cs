@@ -10,9 +10,9 @@ namespace IsusCoreFullNet2017Spa.IsusModels
             FEducationCudMarks = new HashSet<FEducationClaMark>();
         }
 
-        public int PupilId { get; set; }
+        public long PupilId { get; set; }
         public int ActivityId { get; set; }
-        public int ProgOptId { get; set; }
+        public int ProgEptId { get; set; }
         public string CudText { get; set; }
 
         public SActivity Activity { get; set; }

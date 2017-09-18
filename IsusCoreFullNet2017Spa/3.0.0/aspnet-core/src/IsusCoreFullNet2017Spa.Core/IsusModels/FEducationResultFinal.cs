@@ -4,7 +4,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
 {
     public partial class FEducationResultFinal : Entity<long>
     {
-        public int PupilId { get; set; }
+        public long PupilId { get; set; }
         public int ActivityId { get; set; }
         public int Hours { get; set; }
         public int? MarkGod { get; set; }

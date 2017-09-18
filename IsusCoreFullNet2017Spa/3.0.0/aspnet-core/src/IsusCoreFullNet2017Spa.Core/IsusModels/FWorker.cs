@@ -5,7 +5,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
 {
     public partial class FWorker : Entity<long>
     {
-        public int WorkerId { get; set; }
+        public long WorkerId { get; set; }
         public DateTime DtStart { get; set; }
         public DateTime? DtEnd { get; set; }
         public int PositionId { get; set; }

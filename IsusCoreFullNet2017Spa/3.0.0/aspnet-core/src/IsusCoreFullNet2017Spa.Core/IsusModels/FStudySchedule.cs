@@ -8,7 +8,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public DateTime DtStart { get; set; }
         public DateTime DtEnd { get; set; }
         public int ActivityId { get; set; }
-        public int? TeacherId { get; set; }
+        public long? TeacherId { get; set; }
         public int ClassroomId { get; set; }
         public int? BasicGroupId { get; set; }
         public int? ExtraGroupId { get; set; }

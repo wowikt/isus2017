@@ -5,7 +5,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
 {
     public partial class FGroupBasicSostav : Entity<long>
     {
-        public int PupilId { get; set; }
+        public long PupilId { get; set; }
         public int BasicGroupId { get; set; }
         public DateTime DtStart { get; set; }
         public DateTime? DtEnd { get; set; }

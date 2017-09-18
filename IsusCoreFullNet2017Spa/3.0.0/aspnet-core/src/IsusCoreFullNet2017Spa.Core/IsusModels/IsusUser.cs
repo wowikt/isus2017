@@ -36,6 +36,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
             UsersParentshipChild = new HashSet<UserParentship>();
             UsersParentshipParent = new HashSet<UserParentship>();
             UsersSessions = new HashSet<UserSession>();
+            UserOrganizers = new HashSet<UserOrganizer>();
         }
 
         public string CurrentName { get; set; }
@@ -55,6 +56,7 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public bool? IsDeleted { get; set; }
         public int? Tmp { get; set; }
         public string ContactInfo { get; set; }
+        public int? WorkYear { get; set; }
 
         public IsusUserCard UserCard => _userCard ?? (_userCard = new IsusUserCard());
 
@@ -82,7 +84,9 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public ICollection<UserParentship> UsersParentshipChild { get; set; }
         public ICollection<UserParentship> UsersParentshipParent { get; set; }
         public ICollection<UserSession> UsersSessions { get; set; }
+        public ICollection<UserOrganizer> UserOrganizers { get; set; }
 
         public User SystemUser { get; set; }
+        public WorkYearItem WorkYearItem { get; set; }
     }
 }

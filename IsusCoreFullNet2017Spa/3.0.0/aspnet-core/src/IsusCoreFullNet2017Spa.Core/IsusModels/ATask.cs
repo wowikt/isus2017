@@ -7,9 +7,9 @@ namespace IsusCoreFullNet2017Spa.IsusModels
     {
         public string Label { get; set; }
         public int? Tag { get; set; }
-        public int? FactId { get; set; }
-        public int? AuthorId { get; set; }
-        public int ReceiverId { get; set; }
+        public long? FactId { get; set; }
+        public long? AuthorId { get; set; }
+        public long ReceiverId { get; set; }
         public DateTime Dt { get; set; }
         public DateTime Deadline { get; set; }
         public DateTime Showtime { get; set; }
