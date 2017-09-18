@@ -1,0 +1,11 @@
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\bin\Debug\netcoreapp2.0\Isus2017DataModel.deps.json
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\bin\Debug\netcoreapp2.0\Isus2017DataModel.runtimeconfig.json
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\bin\Debug\netcoreapp2.0\Isus2017DataModel.runtimeconfig.dev.json
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\bin\Debug\netcoreapp2.0\Isus2017DataModel.dll
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\obj\Debug\netcoreapp2.0\Isus2017DataModel.csprojResolveAssemblyReference.cache
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\obj\Debug\netcoreapp2.0\Isus2017DataModel.csproj.CoreCompileInputs.cache
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\obj\Debug\netcoreapp2.0\Isus2017DataModel.AssemblyInfoInputs.cache
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\obj\Debug\netcoreapp2.0\Isus2017DataModel.AssemblyInfo.cs
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\bin\Debug\netcoreapp2.0\Isus2017DataModel.pdb
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\obj\Debug\netcoreapp2.0\Isus2017DataModel.dll
+C:\VTProjects\Isus2017\Isus2017DataModel\Isus2017DataModel\obj\Debug\netcoreapp2.0\Isus2017DataModel.pdb

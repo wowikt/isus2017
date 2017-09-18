@@ -1,0 +1,112 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<localizationDictionary culture="ru">
+  <texts>
+    <text name="HomePage" value="Главная" />
+    <text name="About" value="О проекте" />
+    <text name="WellcomeMessage" value="Добро пожаловать в ИС УС &quot;Школа&quot;!" />
+
+    <text name="FormIsNotValidMessage" value="Форма заполнена неверно. Проверьте и исправьте ошибки." />
+    <text name="TenantNameCanNotBeEmpty" value="Имя арендатора не может быть пустым" />
+
+    <text name="InvalidUserNameOrPassword" value="Неверное имя пользователя или пароль" />
+    <text name="ThereIsNoTenantDefinedWithName{0}" value="Арендатор с именем {0} не определен" />
+    <text name="TenantIsNotActive" value="Арендатор {0} не активен." />
+    <text name="UserIsNotActiveAndCanNotLogin" value="Пользователь {0} не активен и не может войти." />
+    <text name="UserEmailIsNotConfirmedAndCanNotLogin">Ваш почтовый адрес не подтвержен. Вы не можете войти.</text>
+    <text name="UserLockedOutMessage">Учетная запись пользователя заблокирована. Попробуйте повторить попытку позже.</text>
+    <text name="PleaseEnterLoginInformation" value="Введите информацию для входа" />
+    <text name="TenancyName" value="Имя арендатора" />
+    <text name="UserNameOrEmail" value="Имя или почтовый адрес пользователя" />
+    <text name="Password" value="Пароль" />
+    <text name="RememberMe" value="Запомнить меня" />
+    <text name="LogIn" value="Войти" />
+
+    <text name="LoginFailed" value="Попытка входа неудачна!" />
+
+    <text name="NameSurname" value="Имя, фамилия" />
+    <text name="UserName" value="Имя пользователя" />
+    <text name="Name" value="Имя" />
+    <text name="Surname" value="Фамилия" />
+    <text name="EmailAddress" value="Почтовый адрес" />
+
+    <text name="Tenants" value="Арендаторы" />
+    <text name="SavedSuccessfully" value="Успешно сохранено" />
+    <text name="CreateNewTenant" value="Создать нового арендатора" />
+    <text name="AdminEmailAddress" value="Почтовый адрес администратора" />
+    <text name="Save" value="Сохранить" />
+    <text name="Cancel" value="Отмена" />
+    <text name="TenantName_Regex_Description" value="Имя арендатора должно быть не меньше 2 символов, начинаться с буквы и продолжаться буквами, цифрами, дефисами или знаками подчеркивания." />
+    <text name="DefaultPasswordIs" value="Пароль по умолчанию {0}" />
+    <text name="CanBeEmptyToLoginAsHost" value="Можно оставить пустым, чтобы войти как владелец." />
+    <text name="Register" value="Зарегистрироваться" />
+    <text name="OrLoginWith" value="Или войти с" />
+    <text name="WaitingForActivationMessage" value="Ваша учетная запись ожидает активации системным администратором." />
+    <text name="TenantSelection" value="Выбор арендатора" />
+    <text name="TenantSelection_Detail" value="Выберите одного из следующих арендаторов." />
+    <text name="Logout" value="Выйти" />
+
+    <text name="RegisterFormUserNameInvalidMessage">Не указывайте почтовый адрес вместо имени пользователя.</text>
+
+    <text name="DatabaseConnectionString" value="Строка подключения к базе данных" />
+    <text name="Users" value="Пользователи" />
+    <text name="IsActive" value="Активен" />
+    <text name="FullName" value="Полное имя" />
+    <text name="CreateNewUser" value="Создать нового пользователя" />
+    <text name="Yes" value="Да" />
+    <text name="No" value="Нет" />
+    <text name="Optional" value="Не обязательно" />
+    <text name="LeaveEmptyToSwitchToHost">Оставьте пустым, чтобы переключиться на владельца</text>
+
+    <text name="CurrentTenant">Текущий арендатор</text>
+    <text name="NotSelected">Не выбрано</text>
+    <text name="Change">Изменить</text>
+    <text name="ChangeTenant">Изменить арендатора</text>
+
+    <text name="MultiLevelMenu">Многоуровневое меню</text>
+    <text name="Back">Назад</text>
+    <text name="SuccessfullyRegistered">Успешно зарегистрировано</text>
+    <text name="WaitingForEmailActivation">Ваш почтовый адрес должен быть активирован</text>
+    <text name="Roles">Роли</text>
+    <text name="DisplayName">Отображаемое имя</text>
+
+    <text name="Edit">Правка</text>
+    <text name="Delete">Удалить</text>
+
+    <text name="CreateNewRole">Создать новую роль</text>
+    <text name="RoleName">Имя роли</text>
+    <text name="Actions">Действия</text>
+
+    <text name="CouldNotCompleteLoginOperation">Не удается выполнить операцию входа. Повторите попытку позже.</text>
+    
+    <text name="Identity.ConcurrencyFailure">Сбой оптимистичного параллелизма, объект был изменен.</text>
+    <text name="Identity.DefaultError">Произошла неизвестная ошибка.</text>
+    <text name="Identity.DuplicateEmail">Почтовый адрес '{0}' уже занят.</text>
+    <text name="Identity.DuplicateRoleName">Имя роли '{0}' ужез занято.</text>
+    <text name="Identity.DuplicateUserName">Имя пользователя '{0}' уже занято.</text>
+    <text name="Identity.InvalidEmail">Почтовый адрес '{0}' неверный.</text>
+    <text name="Identity.InvalidPasswordHasherCompatibilityMode">Указанный режим PasswordHasherCompatibilityMode неверен.</text>
+    <text name="Identity.InvalidPasswordHasherIterationCount">Счетчик итераций должен быть целым положительным числом.</text>
+    <text name="Identity.InvalidRoleName">Имя роли '{0}' неверно.</text>
+    <text name="Identity.InvalidToken">Неверный токен.</text>
+    <text name="Identity.InvalidUserName">Имя пользователя '{0}' неверно, может содержать только буквы и цифры.</text>
+    <text name="Identity.LoginAlreadyAssociated">Пользователь с этим логином уже есть.</text>
+    <text name="Identity.PasswordMismatch">Неверный пароль.</text>
+    <text name="Identity.PasswordRequiresDigit">Пароль должен содержать по меньшей мере одну цифру ('0'-'9').</text>
+    <text name="Identity.PasswordRequiresLower">Пароль должен содержать по меньшей мере одну строчную букву ('a'-'z').</text>
+    <text name="Identity.PasswordRequiresNonAlphanumeric">Пароль должен содержать по меньшей мере один специальный символ.</text>
+    <text name="Identity.PasswordRequiresUpper">Пароль должен содержать по меньшей мере одну прописную букву ('A'-'Z').</text>
+    <text name="Identity.PasswordTooShort">Пароль должен содержать минимум {0} символов.</text>
+    <text name="Identity.RoleNotFound">Роль {0} не существует.</text>
+    <text name="Identity.UserAlreadyHasPassword">У пользователя уже есть пароль.</text>
+    <text name="Identity.UserAlreadyInRole">Пользователь уже имеет роль '{0}'.</text>
+    <text name="Identity.UserLockedOut">Пользователь заблокирован.</text>
+    <text name="Identity.UserLockoutNotEnabled">Для этого пользователя блокировка не разрешена.</text>
+    <text name="Identity.UserNameNotFound">Пользователь {0} не существует.</text>
+    <text name="Identity.UserNotInRole">Пользователь не имеет роли '{0}'.</text>
+    
+    <text name="IsusUser.OnlyForNShkola">Поиск пользователя старой системы возможен только для арендатора &quot;Наша школа&quot;.</text>
+    <text name="IsusUser.CantFind">Пользователь '{0}' в старой системе не найден.</text>
+    <text name="IsusUser.WrongPassword">Введен неверный пароль.</text>
+    <text name="IsusUser.HasNoPassword">Для пользователя не задан пароль. Обратитесь к системному администратору.</text>
+</texts>
+</localizationDictionary>

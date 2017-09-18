@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+
+namespace Isus2017DataModel
+{
+    public partial class FStudyPlansContent
+    {
+        public int Uid { get; set; }
+        public int PlanId { get; set; }
+        public int ActivityId { get; set; }
+        public int Grade { get; set; }
+        public double Hours { get; set; }
+
+        public SActivities Activity { get; set; }
+        public FStudyPlans Plan { get; set; }
+    }
+}
