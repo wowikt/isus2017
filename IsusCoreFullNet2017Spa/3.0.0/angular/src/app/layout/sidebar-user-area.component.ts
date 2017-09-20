@@ -1,6 +1,7 @@
-﻿import { Component, OnInit, Injector, ViewEncapsulation } from '@angular/core';
+import { Component, OnInit, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AppAuthService } from '@shared/auth/app-auth.service';
+import { ChangePasswordComponent } from 'app/users/change-password/change-password.component';
 
 @Component({
     templateUrl: './sidebar-user-area.component.html',
@@ -10,6 +11,7 @@ import { AppAuthService } from '@shared/auth/app-auth.service';
 export class SideBarUserAreaComponent extends AppComponentBase implements OnInit {
 
     shownLoginName: string = "";
+    @ViewChild('changePasswordModal') changePasswordModal: ChangePasswordComponent;
 
     constructor(
         injector: Injector,
@@ -24,5 +26,9 @@ export class SideBarUserAreaComponent extends AppComponentBase implements OnInit
 
     logout(): void {
         this._authService.logout();
+    }
+
+    changePassword(): void {
+        this.changePasswordModal.show();
     }
 }

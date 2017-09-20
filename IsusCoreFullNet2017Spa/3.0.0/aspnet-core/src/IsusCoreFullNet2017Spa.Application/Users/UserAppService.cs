@@ -13,10 +13,12 @@ using Abp.Authorization.Users;
 using Microsoft.EntityFrameworkCore;
 using Abp.IdentityFramework;
 using Abp.UI;
+using Castle.Core.Logging;
 using IsusCoreFullNet2017Spa.Authorization.IsusUsers;
 using IsusCoreFullNet2017Spa.Authorization.Roles;
 using IsusCoreFullNet2017Spa.MultiTenancy;
 using IsusCoreFullNet2017Spa.Roles.Dto;
+using Microsoft.AspNetCore.Http.Authentication;
 
 namespace IsusCoreFullNet2017Spa.Users
 {
@@ -28,10 +30,11 @@ namespace IsusCoreFullNet2017Spa.Users
         private readonly IPasswordHasher<User> _passwordHasher;
         private readonly IRepository<Role> _roleRepository;
         private readonly IsusUserManager _isusUserManager;
+        private readonly AbpSignInManager<Tenant, Role, User> _signInManager;
 
         public UserAppService(IRepository<User, long> repository, UserManager userManager,
             IPasswordHasher<User> passwordHasher, IRepository<Role> roleRepository, RoleManager roleManager,
-            IsusUserManager isusUserManager)
+            IsusUserManager isusUserManager, AbpSignInManager<Tenant, Role, User> signInManager)
             : base(repository)
         {
             _userManager = userManager;
@@ -39,6 +42,7 @@ namespace IsusCoreFullNet2017Spa.Users
             _roleRepository = roleRepository;
             _roleManager = roleManager;
             _isusUserManager = isusUserManager;
+            _signInManager = signInManager;
         }
 
         public override async Task<UserDto> Create(CreateUserDto input)
@@ -91,6 +95,30 @@ namespace IsusCoreFullNet2017Spa.Users
         {
             var roles = await _roleRepository.GetAllListAsync();
             return new ListResultDto<RoleDto>(ObjectMapper.Map<List<RoleDto>>(roles));
+        }
+
+        [AbpAuthorize]
+        public async Task ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            long userId = AbpSession.UserId ?? 0;
+            if (userId == 0)
+            {
+                Logger.Error("UserAppService.ChangePassword: no user logged in");
+                return;
+            }
+
+            var user = await _userManager.GetUserByIdAsync(userId);
+            if (user == null)
+            {
+                Logger.Error("UserAppService.ChangePassword: user does not exist");
+                return;
+            }
+
+            CheckErrors(await _userManager.ChangePasswordAsync(user, changePasswordDto.CurrentPassword,
+                changePasswordDto.NewPassword));
+            Logger.Info("AccountController.Password: password successfully updated, logging out...");
+
+            await _signInManager.SignOutAsync();
         }
 
         protected override User MapToEntity(CreateUserDto createInput)

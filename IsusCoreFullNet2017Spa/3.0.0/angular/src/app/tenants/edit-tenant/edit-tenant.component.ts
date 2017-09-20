@@ -1,7 +1,8 @@
-﻿import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef} from '@angular/core';
+import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef} from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
 import { TenantServiceProxy, TenantDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
+import 'rxjs/add/operator/finally';
 
 import * as _ from "lodash";
 

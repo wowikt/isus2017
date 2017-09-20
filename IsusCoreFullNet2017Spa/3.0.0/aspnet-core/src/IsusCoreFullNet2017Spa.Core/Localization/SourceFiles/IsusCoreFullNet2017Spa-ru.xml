@@ -44,6 +44,7 @@
     <text name="TenantSelection" value="Выбор арендатора" />
     <text name="TenantSelection_Detail" value="Выберите одного из следующих арендаторов." />
     <text name="Logout" value="Выйти" />
+    <text name="ChangePassword" value="Сменить пароль" />
 
     <text name="RegisterFormUserNameInvalidMessage">Не указывайте почтовый адрес вместо имени пользователя.</text>
 

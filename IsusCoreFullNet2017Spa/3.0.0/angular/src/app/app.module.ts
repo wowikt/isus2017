@@ -1,4 +1,4 @@
-﻿import { NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
@@ -18,6 +18,7 @@ import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
 import { UsersComponent } from '@app/users/users.component';
 import { CreateUserComponent } from '@app/users/create-user/create-user.component';
+import { ChangePasswordComponent } from '@app/users/change-password/change-password.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
 import { RolesComponent } from '@app/roles/roles.component';
 import { CreateRoleComponent } from '@app/roles/create-role/create-role.component';
@@ -42,7 +43,8 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
 		CreateTenantComponent,
 		EditTenantComponent,
         UsersComponent,
-		CreateUserComponent,
+        CreateUserComponent,
+        ChangePasswordComponent,
 		EditUserComponent,
       	RolesComponent,        
 		CreateRoleComponent,
