@@ -1,10 +1,10 @@
-﻿<div class="overlay"></div>
+<div class="overlay"></div>
 
 <top-bar></top-bar>
 
 <section>
     <aside id="leftsidebar" class="sidebar">
-        <sidebar-user-area></sidebar-user-area>
+        <sidebar-user-area (changePasswordEvent)="changePassword()"></sidebar-user-area>
         <sidebar-nav></sidebar-nav>
         <sidebar-footer></sidebar-footer>
     </aside>
@@ -17,3 +17,5 @@
         <router-outlet></router-outlet>
     </div>
 </section>
+
+<change-password-modal #changePasswordModal (modalSave)="refresh()"></change-password-modal>

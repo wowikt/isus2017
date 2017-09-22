@@ -1,7 +1,6 @@
-import { Component, OnInit, Injector, ViewEncapsulation, ViewChild } from '@angular/core';
+import { Component, OnInit, Injector, ViewEncapsulation, Output, EventEmitter } from '@angular/core';
 import { AppComponentBase } from '@shared/app-component-base';
 import { AppAuthService } from '@shared/auth/app-auth.service';
-import { ChangePasswordComponent } from 'app/users/change-password/change-password.component';
 
 @Component({
     templateUrl: './sidebar-user-area.component.html',
@@ -9,9 +8,8 @@ import { ChangePasswordComponent } from 'app/users/change-password/change-passwo
     encapsulation: ViewEncapsulation.None
 })
 export class SideBarUserAreaComponent extends AppComponentBase implements OnInit {
-
+    @Output() changePasswordEvent: EventEmitter<any> = new EventEmitter<any>();
     shownLoginName: string = "";
-    @ViewChild('changePasswordModal') changePasswordModal: ChangePasswordComponent;
 
     constructor(
         injector: Injector,
@@ -29,6 +27,6 @@ export class SideBarUserAreaComponent extends AppComponentBase implements OnInit
     }
 
     changePassword(): void {
-        this.changePasswordModal.show();
+        this.changePasswordEvent.emit(null);
     }
 }

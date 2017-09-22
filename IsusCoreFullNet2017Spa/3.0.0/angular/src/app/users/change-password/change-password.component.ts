@@ -6,7 +6,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 import * as _ from "lodash";
 
 @Component({
-    selector: 'change-password-modal',
+  selector: 'change-password-modal',
   templateUrl: './change-password.component.html'
 })
 export class ChangePasswordComponent extends AppComponentBase implements OnInit {
