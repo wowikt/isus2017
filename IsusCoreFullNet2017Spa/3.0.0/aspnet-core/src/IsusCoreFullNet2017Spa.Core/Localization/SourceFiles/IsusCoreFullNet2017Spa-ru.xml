@@ -26,8 +26,17 @@
     <text name="NameSurname" value="Имя, фамилия" />
     <text name="UserName" value="Имя пользователя" />
     <text name="Name" value="Имя" />
+    <text name="FirstName" value="Имя" />
+    <text name="MiddleName" value="Отчество" />
     <text name="Surname" value="Фамилия" />
+    <text name="LastName" value="Фамилия" />
     <text name="EmailAddress" value="Почтовый адрес" />
+    <text name="UserDetails" value="Подробности" />
+    <text name="UserRoles" value="Роли" />
+    <text name="MainUserData" value="Основные сведения" />
+    <text name="PersonalUserData" value="Личные данные" />
+    <text name="UserContacts" value="Контактная информация" />
+    <text name="UserRelatives" value="Родственники" />
 
     <text name="Tenants" value="Арендаторы" />
     <text name="SavedSuccessfully" value="Успешно сохранено" />

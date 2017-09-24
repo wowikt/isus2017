@@ -12,8 +12,9 @@ namespace IsusCoreFullNet2017Spa.IsusModels.XmlSubModels.IsusUser
     [XmlRoot("doc")]
     public class IsusUserCard
     {
-        [XmlElement("body")]
-        public IsusUserCardBody Body { get; set; }
+        [XmlArray("body")]
+        [XmlArrayItem(ElementName = "bodyitem")]
+        public IsusUserCardBodyItem[] Body { get; set; }
 
         [XmlArray("history")]
         [XmlArrayItem(ElementName ="historyitem")]

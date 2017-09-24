@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Abp.Authorization;
 using Abp.Authorization.Users;
 using Abp.Configuration;
@@ -17,6 +18,8 @@ namespace IsusCoreFullNet2017Spa.Authorization.Users
 {
     public class UserManager : AbpUserManager<Role, User>
     {
+        private readonly UserStore _userStore;
+
         public UserManager(
             RoleManager roleManager,
             UserStore store, 
@@ -54,6 +57,17 @@ namespace IsusCoreFullNet2017Spa.Authorization.Users
                 organizationUnitSettings, 
                 settingManager)
         {
+            _userStore = store;
+        }
+
+        public async Task<long?> GetIsusUserId(long userId)
+        {
+            return (await _userStore.UserRepository.FirstOrDefaultAsync(userId))?.IsusUserId;
+        }
+
+        public async Task<long?> GetIsusUserId(User user)
+        {
+            return user == null ? null : (await _userStore.UserRepository.FirstOrDefaultAsync(user.Id))?.IsusUserId;
         }
     }
 }

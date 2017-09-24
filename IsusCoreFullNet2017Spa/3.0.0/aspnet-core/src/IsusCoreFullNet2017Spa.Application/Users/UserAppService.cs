@@ -10,15 +10,18 @@ using Microsoft.AspNetCore.Identity;
 using System.Linq;
 using Abp.Authorization;
 using Abp.Authorization.Users;
+using Abp.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Abp.IdentityFramework;
 using Abp.UI;
 using Castle.Core.Logging;
 using IsusCoreFullNet2017Spa.Authorization.IsusUsers;
 using IsusCoreFullNet2017Spa.Authorization.Roles;
+using IsusCoreFullNet2017Spa.IsusModels;
 using IsusCoreFullNet2017Spa.MultiTenancy;
 using IsusCoreFullNet2017Spa.Roles.Dto;
 using Microsoft.AspNetCore.Http.Authentication;
+using IsusCoreFullNet2017Spa.IsusModels.XmlSubModels.IsusUser;
 
 namespace IsusCoreFullNet2017Spa.Users
 {
@@ -49,22 +52,43 @@ namespace IsusCoreFullNet2017Spa.Users
         {
             CheckCreatePermission();
 
-            var user = ObjectMapper.Map<User>(input);
+            var isusUser = ObjectMapper.Map<IsusUser>(input);
+            //isusUser.UserCard = ObjectMapper.Map<IsusUserCard>(input.UserCard);
+            //isusUser.UserCard.Body = ObjectMapper.Map<IsusUserCardBodyItem[]>(input.UserCard.Body);
+            //isusUser.UserCard.History = ObjectMapper.Map<IsusUserCardHistoryItem[]>(input.UserCard.History);
 
-            user.TenantId = AbpSession.TenantId;
-            user.Password = _passwordHasher.HashPassword(user, input.Password);
-            user.IsEmailConfirmed = true;
+            isusUser.AccountPwd = input.Password;
 
-            CheckErrors(await _userManager.CreateAsync(user));
+            var userDetail = isusUser.UserCard.Body[0];
+            isusUser.CurrentName = $"{userDetail.LastName.ToPascalCase()} {userDetail.FirstName.ToPascalCase()} {userDetail.MiddleName.ToPascalCase()}";
+            isusUser.CurrentShortName =
+                $"{userDetail.LastName.ToPascalCase()} {char.ToUpper(userDetail.FirstName[0])}. {char.ToUpper(userDetail.MiddleName[0])}.";
 
-            if (input.RoleNames != null)
+            long? isusUserId = await _isusUserManager.CreateUser(isusUser);
+            if (isusUserId != null)
             {
-                CheckErrors(await _userManager.SetRoles(user, input.RoleNames));
+                User user = new User
+                {
+                    Name = userDetail.FirstName,
+                    Surname = userDetail.LastName,
+                    UserName = isusUser.AccountName,
+                };
+                user.TenantId = AbpSession.TenantId;
+                user.Password = _passwordHasher.HashPassword(user, input.Password);
+                user.IsEmailConfirmed = true;
+                user.IsusUserId = isusUserId;
+
+                CheckErrors(await _userManager.CreateAsync(user));
+
+                if (input.RoleNames != null)
+                {
+                    CheckErrors(await _userManager.SetRoles(user, input.RoleNames));
+                }
+
+                CurrentUnitOfWork.SaveChanges();
             }
 
-            CurrentUnitOfWork.SaveChanges();
-
-            return MapToEntityDto(user);
+            return MapToEntityDto(isusUser);
         }
 
         public override async Task<UserDto> Update(UserDto input)
@@ -137,9 +161,23 @@ namespace IsusCoreFullNet2017Spa.Users
         protected override UserDto MapToEntityDto(User user)
         {
             var roles = _roleManager.Roles.Where(r => user.Roles.Any(ur => ur.RoleId == r.Id)).Select(r => r.NormalizedName);
-            var userDto = base.MapToEntityDto(user);
+            var userDto = new UserDto
+            {
+                AccountName = user.UserName,
+                Name = user.Name,
+                Surname = user.Surname,
+                Email = user.EmailAddress,
+                FullName = $"{user.Surname} {user.Name}",
+                IsActive = user.IsActive,
+            };
+
             userDto.RoleNames = roles.ToArray();
             return userDto;
+        }
+
+        protected UserDto MapToEntityDto(IsusUser user)
+        {
+            return ObjectMapper.Map<UserDto>(user);
         }
 
         protected override IQueryable<User> CreateFilteredQuery(PagedResultRequestDto input)
@@ -154,7 +192,7 @@ namespace IsusCoreFullNet2017Spa.Users
 
         protected override IQueryable<User> ApplySorting(IQueryable<User> query, PagedResultRequestDto input)
         {
-            return query.OrderBy(r => r.UserName);
+            return query.OrderBy(r => r.IsusUserId == null ? r.UserName : r.IsusUser.CurrentName);
         }
 
         protected virtual void CheckErrors(IdentityResult identityResult)

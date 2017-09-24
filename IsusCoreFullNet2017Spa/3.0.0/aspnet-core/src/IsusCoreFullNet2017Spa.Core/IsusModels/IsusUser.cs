@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 using Abp.Domain.Entities;
 using IsusCoreFullNet2017Spa.Authorization.Users;
+using IsusCoreFullNet2017Spa.Infrastructure;
 using IsusCoreFullNet2017Spa.IsusModels.XmlSubModels.IsusUser;
 
 namespace IsusCoreFullNet2017Spa.IsusModels
@@ -58,7 +60,12 @@ namespace IsusCoreFullNet2017Spa.IsusModels
         public string ContactInfo { get; set; }
         public int? WorkYear { get; set; }
 
-        public IsusUserCard UserCard => _userCard ?? (_userCard = new IsusUserCard());
+        [NotMapped]
+        public IsusUserCard UserCard
+        {
+            get => _userCard ?? (_userCard = XmlSerializationProvider.Deserialize<IsusUserCard>(Data));
+            set => _userCard = value;
+        }
 
         public ICollection<AObjectTypePermission> AObjectTypesPermissions { get; set; }
         public ICollection<AObject> AObjectsAuthor { get; set; }
@@ -88,5 +95,13 @@ namespace IsusCoreFullNet2017Spa.IsusModels
 
         public User SystemUser { get; set; }
         public WorkYearItem WorkYearItem { get; set; }
+
+        public void BeforeSave()
+        {
+            if (UserCard != null)
+            {
+                Data = XmlSerializationProvider.Serialize(UserCard);
+            }
+        }
     }
 }

@@ -2431,29 +2431,50 @@ export interface IExternalAuthenticateResultModel {
 }
 
 export class CreateUserDto implements ICreateUserDto {
-    userName: string;
+    accountName: string;
     name: string;
     surname: string;
-    emailAddress: string;
+    email: string;
     isActive: boolean;
     roleNames: string[];
     password: string;
+    userCard: UserCardDto;
+    isDeveloper: boolean;
+    isAdmin: boolean;
+    isBoss: boolean;
+    accountValid: boolean;
+    surplusIsTeacher: boolean;
+    isDeleted: boolean;
 
     constructor(data?: any) {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
+                    (<any>this)[property] = (data)[property];
             }
+        }
+
+        if (!this.userCard) {
+            this.userCard = new UserCardDto();
+        }
+
+        if (!this.userCard.body || this.userCard.body.length < 1) {
+            this.userCard.body = new Array<UserCardBodyItemDto>();
+            this.userCard.body.push(new UserCardBodyItemDto());
+        }
+
+        if (!this.userCard.history || this.userCard.history.length < 1) {
+            this.userCard.history = new Array<UserCardHistoryItemDto>();
+            this.userCard.history.push(new UserCardHistoryItemDto());
         }
     }
 
     init(data?: any) {
         if (data) {
-            this.userName = data["userName"];
+            this.accountName = data["accountName"];
             this.name = data["name"];
             this.surname = data["surname"];
-            this.emailAddress = data["emailAddress"];
+            this.email = data["email"];
             this.isActive = data["isActive"];
             if (data["roleNames"] && data["roleNames"].constructor === Array) {
                 this.roleNames = [];
@@ -2461,6 +2482,13 @@ export class CreateUserDto implements ICreateUserDto {
                     this.roleNames.push(item);
             }
             this.password = data["password"];
+            this.userCard = data["userCard"] ? UserCardDto.fromJS(data["userCard"]) : <any>undefined;
+            this.isDeveloper = data["isDeveloper"];
+            this.isAdmin = data["isAdmin"];
+            this.isBoss = data["isBoss"];
+            this.accountValid = data["accountValid"];
+            this.surplusIsTeacher = data["surplusIsTeacher"];
+            this.isDeleted = data["isDeleted"];
         }
     }
 
@@ -2472,10 +2500,10 @@ export class CreateUserDto implements ICreateUserDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["userName"] = this.userName;
+        data["accountName"] = this.accountName;
         data["name"] = this.name;
         data["surname"] = this.surname;
-        data["emailAddress"] = this.emailAddress;
+        data["email"] = this.email;
         data["isActive"] = this.isActive;
         if (this.roleNames && this.roleNames.constructor === Array) {
             data["roleNames"] = [];
@@ -2483,30 +2511,232 @@ export class CreateUserDto implements ICreateUserDto {
                 data["roleNames"].push(item);
         }
         data["password"] = this.password;
+        data["userCard"] = this.userCard ? this.userCard.toJSON() : <any>undefined;
+        data["isDeveloper"] = this.isDeveloper;
+        data["isAdmin"] = this.isAdmin;
+        data["isBoss"] = this.isBoss;
+        data["accountValid"] = this.accountValid;
+        data["surplusIsTeacher"] = this.surplusIsTeacher;
+        data["isDeleted"] = this.isDeleted;
         return data; 
     }
 }
 
 export interface ICreateUserDto {
-    userName: string;
+    accountName: string;
     name: string;
     surname: string;
-    emailAddress: string;
+    email: string;
     isActive: boolean;
     roleNames: string[];
     password: string;
+    userCard: UserCardDto;
+    isDeveloper: boolean;
+    isAdmin: boolean;
+    isBoss: boolean;
+    accountValid: boolean;
+    surplusIsTeacher: boolean;
+    isDeleted: boolean;
+}
+
+export class UserCardDto implements IUserCardDto {
+    body: UserCardBodyItemDto[];
+    history: UserCardHistoryItemDto[];
+
+    constructor(data?: IUserCardDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            if (data["body"] && data["body"].constructor === Array) {
+                this.body = [];
+                for (let item of data["body"])
+                    this.body.push(UserCardBodyItemDto.fromJS(item));
+            }
+            if (data["history"] && data["history"].constructor === Array) {
+                this.history = [];
+                for (let item of data["history"])
+                    this.history.push(UserCardHistoryItemDto.fromJS(item));
+            }
+        }
+    }
+
+    static fromJS(data: any): UserCardDto {
+        let result = new UserCardDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        if (this.body && this.body.constructor === Array) {
+            data["body"] = [];
+            for (let item of this.body)
+                data["body"].push(item.toJSON());
+        }
+        if (this.history && this.history.constructor === Array) {
+            data["history"] = [];
+            for (let item of this.history)
+                data["history"].push(item.toJSON());
+        }
+        return data; 
+    }
+}
+
+export interface IUserCardDto {
+    body: UserCardBodyItemDto[];
+    history: UserCardHistoryItemDto[];
+}
+
+export class UserCardBodyItemDto implements IUserCardBodyItemDto {
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    gender: number;
+    birthdate: moment.Moment;
+    inn: string;
+    strah: string;
+    passport: string;
+    info: string;
+    tel: string;
+    addressReg: string;
+    addressFact: string;
+    contacts: string;
+
+    constructor(data?: IUserCardBodyItemDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.firstName = data["firstName"];
+            this.lastName = data["lastName"];
+            this.middleName = data["middleName"];
+            this.gender = data["gender"];
+            this.birthdate = data["birthdate"] ? moment(data["birthdate"].toString()) : <any>undefined;
+            this.inn = data["inn"];
+            this.strah = data["strah"];
+            this.passport = data["passport"];
+            this.info = data["info"];
+            this.tel = data["tel"];
+            this.addressReg = data["addressReg"];
+            this.addressFact = data["addressFact"];
+            this.contacts = data["contacts"];
+        }
+    }
+
+    static fromJS(data: any): UserCardBodyItemDto {
+        let result = new UserCardBodyItemDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["firstName"] = this.firstName;
+        data["lastName"] = this.lastName;
+        data["middleName"] = this.middleName;
+        data["gender"] = this.gender;
+        data["birthdate"] = this.birthdate ? this.birthdate.toISOString() : <any>undefined;
+        data["inn"] = this.inn;
+        data["strah"] = this.strah;
+        data["passport"] = this.passport;
+        data["info"] = this.info;
+        data["tel"] = this.tel;
+        data["addressReg"] = this.addressReg;
+        data["addressFact"] = this.addressFact;
+        data["contacts"] = this.contacts;
+        return data; 
+    }
+}
+
+export interface IUserCardBodyItemDto {
+    firstName: string;
+    lastName: string;
+    middleName: string;
+    gender: number;
+    birthdate: moment.Moment;
+    inn: string;
+    strah: string;
+    passport: string;
+    info: string;
+    tel: string;
+    addressReg: string;
+    addressFact: string;
+    contacts: string;
+}
+
+export class UserCardHistoryItemDto implements IUserCardHistoryItemDto {
+    attr: string;
+    date: moment.Moment;
+    value: string;
+
+    constructor(data?: IUserCardHistoryItemDto) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(data?: any) {
+        if (data) {
+            this.attr = data["attr"];
+            this.date = data["date"] ? moment(data["date"].toString()) : <any>undefined;
+            this.value = data["value"];
+        }
+    }
+
+    static fromJS(data: any): UserCardHistoryItemDto {
+        let result = new UserCardHistoryItemDto();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        data["attr"] = this.attr;
+        data["date"] = this.date ? this.date.toISOString() : <any>undefined;
+        data["value"] = this.value;
+        return data; 
+    }
+}
+
+export interface IUserCardHistoryItemDto {
+    attr: string;
+    date: moment.Moment;
+    value: string;
 }
 
 export class UserDto implements IUserDto {
-    userName: string;
+    accountName: string;
     name: string;
     surname: string;
-    emailAddress: string;
+    email: string;
     isActive: boolean;
     fullName: string;
     lastLoginTime: moment.Moment;
     creationTime: moment.Moment;
     roleNames: string[];
+    isDeveloper: boolean;
+    isAdmin: boolean;
+    isBoss: boolean;
+    accountValid: boolean;
+    surplusIsTeacher: boolean;
+    isDeleted: boolean;
+    userCard: UserCardDto;
     id: number;
 
     constructor(data?: IUserDto) {
@@ -2520,10 +2750,10 @@ export class UserDto implements IUserDto {
 
     init(data?: any) {
         if (data) {
-            this.userName = data["userName"];
+            this.accountName = data["accountName"];
             this.name = data["name"];
             this.surname = data["surname"];
-            this.emailAddress = data["emailAddress"];
+            this.email = data["email"];
             this.isActive = data["isActive"];
             this.fullName = data["fullName"];
             this.lastLoginTime = data["lastLoginTime"] ? moment(data["lastLoginTime"].toString()) : <any>undefined;
@@ -2533,6 +2763,13 @@ export class UserDto implements IUserDto {
                 for (let item of data["roleNames"])
                     this.roleNames.push(item);
             }
+            this.isDeveloper = data["isDeveloper"];
+            this.isAdmin = data["isAdmin"];
+            this.isBoss = data["isBoss"];
+            this.accountValid = data["accountValid"];
+            this.surplusIsTeacher = data["surplusIsTeacher"];
+            this.isDeleted = data["isDeleted"];
+            this.userCard = data["userCard"] ? UserCardDto.fromJS(data["userCard"]) : <any>undefined;
             this.id = data["id"];
         }
     }
@@ -2545,10 +2782,10 @@ export class UserDto implements IUserDto {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["userName"] = this.userName;
+        data["accountName"] = this.accountName;
         data["name"] = this.name;
         data["surname"] = this.surname;
-        data["emailAddress"] = this.emailAddress;
+        data["email"] = this.email;
         data["isActive"] = this.isActive;
         data["fullName"] = this.fullName;
         data["lastLoginTime"] = this.lastLoginTime ? this.lastLoginTime.toISOString() : <any>undefined;
@@ -2558,21 +2795,35 @@ export class UserDto implements IUserDto {
             for (let item of this.roleNames)
                 data["roleNames"].push(item);
         }
+        data["isDeveloper"] = this.isDeveloper;
+        data["isAdmin"] = this.isAdmin;
+        data["isBoss"] = this.isBoss;
+        data["accountValid"] = this.accountValid;
+        data["surplusIsTeacher"] = this.surplusIsTeacher;
+        data["isDeleted"] = this.isDeleted;
+        data["userCard"] = this.userCard ? this.userCard.toJSON() : <any>undefined;
         data["id"] = this.id;
         return data; 
     }
 }
 
 export interface IUserDto {
-    userName: string;
+    accountName: string;
     name: string;
     surname: string;
-    emailAddress: string;
+    email: string;
     isActive: boolean;
     fullName: string;
     lastLoginTime: moment.Moment;
     creationTime: moment.Moment;
     roleNames: string[];
+    isDeveloper: boolean;
+    isAdmin: boolean;
+    isBoss: boolean;
+    accountValid: boolean;
+    surplusIsTeacher: boolean;
+    isDeleted: boolean;
+    userCard: UserCardDto;
     id: number;
 }
 

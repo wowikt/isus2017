@@ -34,9 +34,9 @@
                     </thead>
                     <tbody>
                         <tr *ngFor="let user of users | paginate: { id: 'server', itemsPerPage: pageSize, currentPage: pageNumber, totalItems: totalItems }">
-                            <td>{{user.userName}}</td>
+                            <td>{{user.accountName}}</td>
                             <td>{{user.fullName}}</td>
-                            <td>{{user.emailAddress}}</td>
+                            <td>{{user.email}}</td>
                             <td align="center">
                                 <i class="material-icons" *ngIf="user.isActive" style="color:green;">check_box</i>
                                 <i class="material-icons" *ngIf="!user.isActive" style="color:red;">indeterminate_check_box</i>

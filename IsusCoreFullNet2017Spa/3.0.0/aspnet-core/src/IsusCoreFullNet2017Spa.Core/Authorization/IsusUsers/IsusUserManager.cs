@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using System.Threading.Tasks;
 using Abp.Authorization.Users;
 using Abp.Domain.Repositories;
@@ -57,7 +58,7 @@ namespace IsusCoreFullNet2017Spa.Authorization.IsusUsers
             return user;
         }
 
-        public bool TryUserLogin(IsusModels.IsusUser user, string password)
+        public bool TryUserLogin(IsusUser user, string password)
         {
 #if DEBUG
             if (user.AccountPwd == null)
@@ -186,6 +187,23 @@ namespace IsusCoreFullNet2017Spa.Authorization.IsusUsers
             }
 
             return tenant;
+        }
+
+        public async Task<long?> CreateUser(IsusUser user)
+        {
+            if (await _isusUserRepository.FirstOrDefaultAsync(iu => iu.AccountName == user.AccountName) != null)
+            {
+                throw new UserFriendlyException(L("Identity.DuplicateUserName"));
+            }
+
+            System.Security.Cryptography.MD5CryptoServiceProvider md5Obj =
+                new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] pwdMd5 = Encoding.UTF8.GetBytes(user.AccountPwd);
+            pwdMd5 = md5Obj.ComputeHash(pwdMd5);
+            user.AccountPwdMd5 = pwdMd5;
+
+            user.BeforeSave();
+            return await _isusUserRepository.InsertAndGetIdAsync(user);
         }
     }
 }
