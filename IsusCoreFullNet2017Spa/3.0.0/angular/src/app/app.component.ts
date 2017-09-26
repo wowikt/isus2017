@@ -4,6 +4,7 @@ import { AppComponentBase } from '@shared/app-component-base';
 
 import { SignalRHelper } from '@shared/helpers/SignalRHelper';
 import { ChangePasswordComponent } from "app/users/change-password/change-password.component";
+import { AppAuthService } from '@shared/auth/app-auth.service';
 
 @Component({
   templateUrl: './app.component.html'
@@ -14,7 +15,8 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
   private viewContainerRef: ViewContainerRef;
 
   constructor(
-    injector: Injector
+      injector: Injector,
+      private _authService: AppAuthService
   ) {
     super(injector);
   }
@@ -47,5 +49,9 @@ export class AppComponent extends AppComponentBase implements OnInit, AfterViewI
 
     changePassword(): void {
         this.changePasswordModal.show();
+    }
+
+    logout(): void {
+        this._authService.logout();
     }
 }

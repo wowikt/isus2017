@@ -53,10 +53,6 @@ namespace IsusCoreFullNet2017Spa.Users
             CheckCreatePermission();
 
             var isusUser = ObjectMapper.Map<IsusUser>(input);
-            //isusUser.UserCard = ObjectMapper.Map<IsusUserCard>(input.UserCard);
-            //isusUser.UserCard.Body = ObjectMapper.Map<IsusUserCardBodyItem[]>(input.UserCard.Body);
-            //isusUser.UserCard.History = ObjectMapper.Map<IsusUserCardHistoryItem[]>(input.UserCard.History);
-
             isusUser.AccountPwd = input.Password;
 
             var userDetail = isusUser.UserCard.Body[0];
