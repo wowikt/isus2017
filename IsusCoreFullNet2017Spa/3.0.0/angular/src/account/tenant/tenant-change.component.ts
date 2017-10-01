@@ -1,4 +1,4 @@
-﻿import { Component, OnInit, Injector, ViewChild } from '@angular/core';
+import { Component, OnInit, Injector, ViewChild } from '@angular/core';
 import { AccountServiceProxy } from '@shared/service-proxies/service-proxies' 
 import { TenantChangeModalComponent } from './tenant-change-modal.component'
 import { AppComponentBase } from '@shared/app-component-base';
@@ -15,8 +15,7 @@ export class TenantChangeComponent extends AppComponentBase implements OnInit {
     name: string;
 
     constructor(
-        injector: Injector,
-        private _accountService: AccountServiceProxy
+        injector: Injector
         ) { 
         super(injector);
     }

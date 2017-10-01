@@ -1,4 +1,4 @@
-{
+w{
     "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
     "project": {
         "name": "abp-project-name-template"
@@ -23,20 +23,21 @@
             "test": "test.ts",
             "tsconfig": "tsconfig.json",
             "prefix": "app",
-            "styles": [
-                "assets/fonts/roboto/roboto.css",
-                "../node_modules/bootstrap/dist/css/bootstrap.min.css",
-                "../node_modules/simple-line-icons/css/simple-line-icons.css",
-                "../node_modules/font-awesome/css/font-awesome.css",
-                "../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
-                "../node_modules/toastr/build/toastr.css",
-                "../node_modules/sweetalert/dist/sweetalert.css",
-                "../node_modules/node-waves/dist/waves.css",
-                "../src/bsb-theme/css/materialize.css",
-                "../src/bsb-theme/css/style.css",
-                "../src/bsb-theme/css/themes/all-themes.css",
-                "../src/shared/core.less"
-            ],
+          "styles": [
+            "assets/fonts/roboto/roboto.css",
+            "../node_modules/bootstrap/dist/css/bootstrap.min.css",
+            "../node_modules/simple-line-sicons/css/simple-line-icons.css",
+            "../node_modules/font-awesome/css/font-awesome.css",
+            "../node_modules/famfamfam-flags/dist/sprite/famfamfam-flags.css",
+            "../node_modules/toastr/build/toastr.css",
+            "../node_modules/sweetalert/dist/sweetalert.css",
+            "../node_modules/node-waves/dist/waves.css",
+            "../src/bsb-theme/css/materialize.css",
+            "../src/bsb-theme/css/style.css",
+            "../src/bsb-theme/css/themes/all-themes.css",
+            "../src/shared/core.less",
+            "../node_modules/ngx-bootstrap/datepicker/bs-datepicker.css"
+          ],
             "scripts": [
                 "../node_modules/jquery/dist/jquery.min.js",
                 "../node_modules/jquery-migrate/dist/jquery-migrate.min.js",

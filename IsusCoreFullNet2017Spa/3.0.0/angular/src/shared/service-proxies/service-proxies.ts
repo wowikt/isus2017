@@ -1483,12 +1483,9 @@ export interface IIsTenantAvailableOutput {
 }
 
 export class RegisterInput implements IRegisterInput {
-    name: string;
-    surname: string;
     userName: string;
     emailAddress: string;
     password: string;
-    captchaResponse: string;
 
     constructor(data?: IRegisterInput) {
         if (data) {
@@ -1501,12 +1498,9 @@ export class RegisterInput implements IRegisterInput {
 
     init(data?: any) {
         if (data) {
-            this.name = data["name"];
-            this.surname = data["surname"];
             this.userName = data["userName"];
             this.emailAddress = data["emailAddress"];
             this.password = data["password"];
-            this.captchaResponse = data["captchaResponse"];
         }
     }
 
@@ -1518,23 +1512,17 @@ export class RegisterInput implements IRegisterInput {
 
     toJSON(data?: any) {
         data = typeof data === 'object' ? data : {};
-        data["name"] = this.name;
-        data["surname"] = this.surname;
         data["userName"] = this.userName;
         data["emailAddress"] = this.emailAddress;
         data["password"] = this.password;
-        data["captchaResponse"] = this.captchaResponse;
         return data; 
     }
 }
 
 export interface IRegisterInput {
-    name: string;
-    surname: string;
     userName: string;
     emailAddress: string;
     password: string;
-    captchaResponse: string;
 }
 
 export class RegisterOutput implements IRegisterOutput {
@@ -2450,22 +2438,8 @@ export class CreateUserDto implements ICreateUserDto {
         if (data) {
             for (var property in data) {
                 if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (data)[property];
+                    (<any>this)[property] = (<any>data)[property];
             }
-        }
-
-        if (!this.userCard) {
-            this.userCard = new UserCardDto();
-        }
-
-        if (!this.userCard.body || this.userCard.body.length < 1) {
-            this.userCard.body = new Array<UserCardBodyItemDto>();
-            this.userCard.body.push(new UserCardBodyItemDto());
-        }
-
-        if (!this.userCard.history || this.userCard.history.length < 1) {
-            this.userCard.history = new Array<UserCardHistoryItemDto>();
-            this.userCard.history.push(new UserCardHistoryItemDto());
         }
     }
 

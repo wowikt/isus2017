@@ -18,6 +18,7 @@
     <text name="TenancyName" value="Имя арендатора" />
     <text name="UserNameOrEmail" value="Имя или почтовый адрес пользователя" />
     <text name="Password" value="Пароль" />
+    <text name="ConfirmPassword" value="Подтвердите пароль" />
     <text name="RememberMe" value="Запомнить меня" />
     <text name="LogIn" value="Войти" />
 
@@ -37,6 +38,15 @@
     <text name="PersonalUserData" value="Личные данные" />
     <text name="UserContacts" value="Контактная информация" />
     <text name="UserRelatives" value="Родственники" />
+    <text name="BirthDate" value="Дата рождения" />
+    <text name="Inn" value="ИНН" />
+    <text name="Strah" value="№ страхового пенсионного свидетельства" />
+    <text name="Passport" value="Паспортные данные" />
+    <text name="Info" value="Дополнительная информация" />
+    <text name="Phone" value="Телефон" />
+    <text name="AddressReg" value="Адрес регистрации" />
+    <text name="AddressFact" value="Фактический адрес" />
+    <text name="Contacts" value="Прочая информация" />
 
     <text name="Tenants" value="Арендаторы" />
     <text name="SavedSuccessfully" value="Успешно сохранено" />

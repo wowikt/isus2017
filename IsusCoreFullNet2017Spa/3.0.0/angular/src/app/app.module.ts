@@ -5,6 +5,7 @@ import { HttpModule, JsonpModule } from '@angular/http';
 
 import { ModalModule } from 'ngx-bootstrap';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -55,7 +56,6 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         SideBarNavComponent,
         SideBarFooterComponent,
         RightSideBarComponent
-    
     ],
     imports: [
         CommonModule,
@@ -63,6 +63,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
         HttpModule,
         JsonpModule,
         ModalModule.forRoot(),
+        BsDatepickerModule.forRoot(),
         AbpModule,
         AppRoutingModule,
         ServiceProxyModule,

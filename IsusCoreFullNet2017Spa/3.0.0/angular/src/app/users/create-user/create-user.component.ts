@@ -1,6 +1,6 @@
 import { Component, ViewChild, Injector, Output, EventEmitter, ElementRef, OnInit } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap';
-import { UserServiceProxy, CreateUserDto, RoleDto } from '@shared/service-proxies/service-proxies';
+import { UserServiceProxy, CreateUserDto, RoleDto, UserCardDto, UserCardBodyItemDto, UserCardHistoryItemDto } from '@shared/service-proxies/service-proxies';
 import { AppComponentBase } from '@shared/app-component-base';
 
 import * as _ from "lodash";
@@ -20,6 +20,8 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
     saving: boolean = false;
     user: CreateUserDto = null;
     roles: RoleDto[] = null;
+    minBirthdate = new Date(1917, 1, 1);
+    maxBirthdate = Date.now();
 
     constructor(
         injector: Injector,
@@ -38,7 +40,13 @@ export class CreateUserComponent extends AppComponentBase implements OnInit {
     show(): void {
         this.active = true;
         this.modal.show();
-        this.user = new CreateUserDto({ isActive: true });
+        this.user = new CreateUserDto();
+        this.user.isActive = true;
+        this.user.userCard = new UserCardDto();
+        this.user.userCard.body = [];
+        this.user.userCard.body.push(new UserCardBodyItemDto());
+        this.user.userCard.history = [];
+        this.user.userCard.history.push(new UserCardHistoryItemDto());
     }
 
     onShown(): void {
