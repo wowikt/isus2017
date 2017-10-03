@@ -195,5 +195,10 @@ namespace IsusCoreFullNet2017Spa.Users
         {
             identityResult.CheckErrors(LocalizationManager);
         }
+
+        public override Task<PagedResultDto<UserDto>> GetAll(PagedResultRequestDto input)
+        {
+            return base.GetAll(input);
+        }
     }
 }

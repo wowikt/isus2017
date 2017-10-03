@@ -41,7 +41,7 @@ export class TenantChangeModalComponent extends AppComponentBase {
         if (!this.tenancyName) {
             abp.multiTenancy.setTenantIdCookie(undefined);
             this.close();
-            location.reload();
+            location.replace("/");
             return;
         }
 
@@ -56,7 +56,7 @@ export class TenantChangeModalComponent extends AppComponentBase {
                     case AppTenantAvailabilityState.Available:
                         abp.multiTenancy.setTenantIdCookie(result.tenantId);
                         this.close();
-                        location.reload();
+                        location.replace("/");
                         return;
                     case AppTenantAvailabilityState.InActive:
                         this.message.warn(this.l('TenantIsNotActive', this.tenancyName));
