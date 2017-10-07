@@ -196,14 +196,20 @@ namespace IsusCoreFullNet2017Spa.Authorization.IsusUsers
                 throw new UserFriendlyException(L("Identity.DuplicateUserName"));
             }
 
-            System.Security.Cryptography.MD5CryptoServiceProvider md5Obj =
-                new System.Security.Cryptography.MD5CryptoServiceProvider();
-            byte[] pwdMd5 = Encoding.UTF8.GetBytes(user.AccountPwd);
-            pwdMd5 = md5Obj.ComputeHash(pwdMd5);
-            user.AccountPwdMd5 = pwdMd5;
+            SetPassword(user, user.AccountPwd);
 
             user.BeforeSave();
             return await _isusUserRepository.InsertAndGetIdAsync(user);
+        }
+
+        public void SetPassword(IsusUser isusUser, string password)
+        {
+            isusUser.AccountPwd = password;
+            System.Security.Cryptography.MD5CryptoServiceProvider md5Obj =
+                new System.Security.Cryptography.MD5CryptoServiceProvider();
+            byte[] pwdMd5 = Encoding.UTF8.GetBytes(isusUser.AccountPwd);
+            pwdMd5 = md5Obj.ComputeHash(pwdMd5);
+            isusUser.AccountPwdMd5 = pwdMd5;
         }
     }
 }

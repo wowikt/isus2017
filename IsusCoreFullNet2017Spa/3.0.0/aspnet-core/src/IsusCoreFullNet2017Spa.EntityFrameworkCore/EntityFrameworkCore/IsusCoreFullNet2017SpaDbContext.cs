@@ -2016,6 +2016,10 @@ namespace IsusCoreFullNet2017Spa.EntityFrameworkCore
                     .WithOne(p => p.SystemUser)
                     .HasForeignKey<User>(d => d.IsusUserId)
                     .HasConstraintName("FK_AbpUsers_Users");
+
+                entity.HasIndex(e => e.IsusUserId)
+                    .HasName("IX_Users_IsusUsers")
+                    .IsUnique();
             });
         }
     }

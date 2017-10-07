@@ -13,12 +13,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using IsusCoreFullNet2017Spa.IsusModels;
 
 namespace IsusCoreFullNet2017Spa.Authorization.Users
 {
     public class UserManager : AbpUserManager<Role, User>
     {
         private readonly UserStore _userStore;
+        private readonly IRepository<IsusUser, long> _isusUserRepository;
 
         public UserManager(
             RoleManager roleManager,
@@ -35,7 +37,8 @@ namespace IsusCoreFullNet2017Spa.Authorization.Users
             IUnitOfWorkManager unitOfWorkManager, 
             ICacheManager cacheManager, 
             IRepository<OrganizationUnit, long> organizationUnitRepository, 
-            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository, 
+            IRepository<UserOrganizationUnit, long> userOrganizationUnitRepository,
+            IRepository<IsusUser, long> isusUserRepository,
             IOrganizationUnitSettings organizationUnitSettings, 
             ISettingManager settingManager)
             : base(
@@ -58,6 +61,7 @@ namespace IsusCoreFullNet2017Spa.Authorization.Users
                 settingManager)
         {
             _userStore = store;
+            _isusUserRepository = isusUserRepository;
         }
 
         public async Task<long?> GetIsusUserId(long userId)
@@ -65,9 +69,20 @@ namespace IsusCoreFullNet2017Spa.Authorization.Users
             return (await _userStore.UserRepository.FirstOrDefaultAsync(userId))?.IsusUserId;
         }
 
-        public async Task<long?> GetIsusUserId(User user)
+        public long? GetIsusUserId(User user)
         {
-            return user == null ? null : (await _userStore.UserRepository.FirstOrDefaultAsync(user.Id))?.IsusUserId;
+            return user?.IsusUserId;
+        }
+
+        public override async Task<User> GetUserByIdAsync(long userId)
+        {
+            var result = await base.GetUserByIdAsync(userId);
+            if (result.IsusUser == null && result.IsusUserId.HasValue)
+            {
+                result.IsusUser = _isusUserRepository.Get(result.IsusUserId.Value);
+            }
+
+            return result;
         }
     }
 }
