@@ -15,9 +15,10 @@ using System;
 namespace IsusCoreFullNet2017Spa.Migrations
 {
     [DbContext(typeof(IsusCoreFullNet2017SpaDbContext))]
-    partial class IsusCoreFullNet2017SpaDbContextModelSnapshot : ModelSnapshot
+    [Migration("20171007171107_AddedIndexToAbpUsersTable")]
+    partial class AddedIndexToAbpUsersTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

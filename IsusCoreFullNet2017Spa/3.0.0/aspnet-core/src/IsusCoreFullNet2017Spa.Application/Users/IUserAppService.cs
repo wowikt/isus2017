@@ -3,6 +3,7 @@ using Abp.Application.Services;
 using Abp.Application.Services.Dto;
 using IsusCoreFullNet2017Spa.Roles.Dto;
 using IsusCoreFullNet2017Spa.Users.Dto;
+using IsusCoreFullNet2017Spa.IsusUsers.Dto;
 
 namespace IsusCoreFullNet2017Spa.Users
 {

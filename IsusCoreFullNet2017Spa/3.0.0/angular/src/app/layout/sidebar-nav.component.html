@@ -1,4 +1,4 @@
-﻿<div class="menu">
+<div class="menu">
     <ul class="list">
         <ng-template ngFor let-menuItem [ngForOf]="menuItems" let-mainMenuItemIndex="index">
             <li *ngIf="showMenuItem(menuItem)" routerLinkActive="active">
@@ -13,7 +13,11 @@
                     <span>{{menuItem.name}}</span>
                 </a>
                 <!-- Has child menu items (so, this is a parent menu) -->
-                <a href="javascript:void(0);" class="menu-toggle" *ngIf="menuItem.items">
+                <!--<a href="javascript:void(0);" class="menu-toggle" *ngIf="menuItem.items">
+                    <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
+                    <span>{{menuItem.name}}</span>
+                </a>-->
+                <a [routerLink]="[menuItem.route]" class="menu-toggle" *ngIf="menuItem.items">
                     <i *ngIf="menuItem.icon" class="material-icons">{{menuItem.icon}}</i>
                     <span>{{menuItem.name}}</span>
                 </a>

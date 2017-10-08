@@ -33,7 +33,7 @@ export class ChangePasswordComponent extends AppComponentBase implements OnInit 
     show(): void {
         this.active = true;
         this.modal.show();
-        this.user = new ChangePasswordDto({ isActive: true });
+        this.user = new ChangePasswordDto();
     }
 
     onShown(): void {

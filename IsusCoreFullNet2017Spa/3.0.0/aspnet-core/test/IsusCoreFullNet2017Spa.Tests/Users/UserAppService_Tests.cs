@@ -36,12 +36,12 @@ namespace IsusCoreFullNet2017Spa.Tests.Users
             await _userAppService.Create(
                 new CreateUserDto
                 {
-                    EmailAddress = "john@volosoft.com",
+                    Email = "john@volosoft.com",
                     IsActive = true,
                     Name = "John",
                     Surname = "Nash",
                     Password = "123qwe",
-                    UserName = "john.nash"
+                    AccountName = "john.nash"
                 });
 
             await UsingDbContextAsync(async context =>

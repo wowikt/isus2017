@@ -8,9 +8,12 @@ using IsusCoreFullNet2017Spa.IsusUsers.Dto;
 using IsusCoreFullNet2017Spa.Authorization.IsusUsers;
 using Abp.Domain.Repositories;
 using IsusCoreFullNet2017Spa.IsusModels;
+using Abp.Authorization;
+using IsusCoreFullNet2017Spa.Authorization;
 
 namespace IsusCoreFullNet2017Spa.IsusUsers
 {
+    [AbpAuthorize(PermissionNames.Pages_Users)]
     public class IsusUserAppService : IsusCoreFullNet2017SpaAppServiceBase, IIsusUserAppService
     {
         private readonly IsusUserManager _isusUserManager;
@@ -26,12 +29,14 @@ namespace IsusCoreFullNet2017Spa.IsusUsers
 
         public async Task<PagedResultDto<IsusUserDto>> GetAll(PagedResultRequestDto input, string filter)
         {
-            var query = _isusUserRepository.GetAll().Where(iu => iu.SystemUser == null);
+            var query = _isusUserRepository.GetAll().Where(iu => iu.SystemUser == null || iu.SystemUser.IsDeleted);
             if (!string.IsNullOrEmpty(filter))
             {
                 filter = filter.ToUpper();
                 query = query.Where(iu => iu.CurrentName.ToUpper().StartsWith(filter));
             }
+
+            query = query.OrderBy(iu => iu.CurrentName);
 
             return new PagedResultDto<IsusUserDto>
             {
@@ -52,6 +57,11 @@ namespace IsusCoreFullNet2017Spa.IsusUsers
 
             var user = await _isusUserManager.CreateUserForIsusUserAsync(isusUser, isusUser.AccountPwd);
             return true;
+        }
+
+        public Task<IsusUserDto> Get(long id)
+        {
+            throw new NotImplementedException();
         }
     }
 }
