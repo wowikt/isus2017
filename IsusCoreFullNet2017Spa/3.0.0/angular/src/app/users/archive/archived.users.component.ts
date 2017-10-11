@@ -16,13 +16,13 @@ export class ArchivedUsersComponent extends PagedListingComponentBase<IsusUserDt
 
     constructor(
         injector: Injector,
-        private _userService: IsusUserServiceProxy
+        private _isusUserService: IsusUserServiceProxy
     ) {
         super(injector);
     }
 
     protected list(request: PagedRequestDto, pageNumber: number, finishedCallback: Function): void {
-        this._userService.getAll(request.skipCount, request.maxResultCount, undefined)
+        this._isusUserService.getAll(request.skipCount, request.maxResultCount, undefined)
             .finally(() => {
                 finishedCallback();
             })
@@ -34,5 +34,16 @@ export class ArchivedUsersComponent extends PagedListingComponentBase<IsusUserDt
 
     protected delete(entity: any): void {
         throw new Error("Method not implemented.");
+    }
+
+    protected moveUserToMainList(user: IsusUserDto): void {
+        this.isTableLoading = true;
+        this._isusUserService.moveToMainUserTable(user.id)
+            .finally(() => {
+                this.isTableLoading = false;
+            })
+            .subscribe((result: boolean) => {
+                this.getDataPage(this.pageNumber);
+            });
     }
 }

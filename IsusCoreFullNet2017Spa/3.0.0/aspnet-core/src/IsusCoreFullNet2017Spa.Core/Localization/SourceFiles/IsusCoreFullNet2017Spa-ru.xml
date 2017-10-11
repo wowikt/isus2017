@@ -47,6 +47,7 @@
     <text name="AddressReg" value="Адрес регистрации" />
     <text name="AddressFact" value="Фактический адрес" />
     <text name="Contacts" value="Прочая информация" />
+    <text name="MoveToMainList" value="Перенести в основной список" />
 
     <text name="Tenants" value="Арендаторы" />
     <text name="SavedSuccessfully" value="Успешно сохранено" />
@@ -69,6 +70,7 @@
 
     <text name="DatabaseConnectionString" value="Строка подключения к базе данных" />
     <text name="Users" value="Пользователи" />
+    <text name="ArchivedUsers" value="Архив пользователей" />
     <text name="IsActive" value="Активен" />
     <text name="FullName" value="Полное имя" />
     <text name="CreateNewUser" value="Создать нового пользователя" />
@@ -91,6 +93,8 @@
 
     <text name="Edit">Правка</text>
     <text name="Delete">Удалить</text>
+    <text name="Next">Далее</text>
+    <text name="Prev">Назад</text>
 
     <text name="CreateNewRole">Создать новую роль</text>
     <text name="RoleName">Имя роли</text>

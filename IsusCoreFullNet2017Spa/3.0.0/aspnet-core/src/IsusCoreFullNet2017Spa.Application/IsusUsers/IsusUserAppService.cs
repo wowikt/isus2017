@@ -38,11 +38,22 @@ namespace IsusCoreFullNet2017Spa.IsusUsers
 
             query = query.OrderBy(iu => iu.CurrentName);
 
+            var items = ObjectMapper.Map<List<IsusUserDto>>(await query.Skip(input.SkipCount).Take(input.MaxResultCount)
+                    .ToAsyncEnumerable().ToList());
+
+            items.ForEach(iu =>
+            {
+                if (!string.IsNullOrEmpty(iu.AccountPwd))
+                {
+                    iu.AccountPwd = "111111";
+                    iu.AccountPwdMd5 = null;
+                }
+            });
+
             return new PagedResultDto<IsusUserDto>
             {
                 TotalCount = query.Count(),
-                Items = ObjectMapper.Map<List<IsusUserDto>>(await query.Skip(input.SkipCount).Take(input.MaxResultCount)
-                    .ToAsyncEnumerable().ToList()),
+                Items = items,
             };
         }
 
