@@ -12,7 +12,7 @@ namespace IsusCoreFullNet2017Spa.IsusUsers
     {
         Task<PagedResultDto<IsusUserDto>> GetAll(PagedResultRequestDto input, string filter);
 
-        Task<bool> MoveToMainUserTable(long isusUserId);
+        Task<bool> MoveToMainUserTable(long isusUserId, string login, string password);
 
         Task<IsusUserDto> Get(long id);
     }

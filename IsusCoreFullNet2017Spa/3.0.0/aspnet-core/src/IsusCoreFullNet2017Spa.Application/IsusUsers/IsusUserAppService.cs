@@ -57,12 +57,24 @@ namespace IsusCoreFullNet2017Spa.IsusUsers
             };
         }
 
-        public async Task<bool> MoveToMainUserTable(long isusUserId)
+        public async Task<bool> MoveToMainUserTable(long isusUserId, string login, string password)
         {
             var isusUser = await _isusUserRepository.GetAsync(isusUserId);
+            bool needsUpdate = false;
+            if(string.IsNullOrEmpty(isusUser.AccountPwd))
+            {
+                isusUser.AccountName = login;
+                needsUpdate = true;
+            }
+
             if (string.IsNullOrEmpty(isusUser.AccountPwd))
             {
-                _isusUserManager.SetPassword(isusUser, DefaultPassword);
+                _isusUserManager.SetPassword(isusUser, password ?? DefaultPassword);
+                needsUpdate = true;
+            }
+
+            if (needsUpdate)
+            {
                 await _isusUserRepository.UpdateAsync(isusUser);
             }
 

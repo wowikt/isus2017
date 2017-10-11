@@ -59,13 +59,9 @@
                     <pagination-controls (pageChange)="getDataPage($event)" maxSize="13" id="server"
                                          nextLabel="{{l('Next')}}" previousLabel="{{l('Prev')}}"></pagination-controls>
                 </div>
-                <button type="button" data-toggle="modal" class="btn btn-primary btn-circle waves-effect waves-circle waves-float pull-right" (click)="createUser()">
-                    <i class="material-icons">add</i>
-                </button>
             </div>
         </div>
     </div>
 </div>
 
-<create-user-modal #createUserModal (modalSave)="refresh()"></create-user-modal>
-<edit-user-modal #editUserModal (modalSave)="refresh()"></edit-user-modal>
+<move-user-to-main-list-modal #moveUserToMainListModal (modalSave)="refresh()"></move-user-to-main-list-modal>

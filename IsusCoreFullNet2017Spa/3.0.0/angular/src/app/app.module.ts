@@ -19,6 +19,7 @@ import { HomeComponent } from '@app/home/home.component';
 import { AboutComponent } from '@app/about/about.component';
 import { UsersComponent } from '@app/users/users.component';
 import { ArchivedUsersComponent } from './users/archive/archived.users.component';
+import { MoveUserToMainListComponent } from "./users/archive/move-user-to-main-list/move-user-to-main-list.component"
 import { CreateUserComponent } from '@app/users/create-user/create-user.component';
 import { ChangePasswordComponent } from '@app/users/change-password/change-password.component';
 import { EditUserComponent } from './users/edit-user/edit-user.component';
@@ -46,6 +47,7 @@ import { MaterialInput } from '@shared/directives/material-input.directive';
 		EditTenantComponent,
         UsersComponent,
         ArchivedUsersComponent,
+        MoveUserToMainListComponent,
         CreateUserComponent,
         ChangePasswordComponent,
 		EditUserComponent,

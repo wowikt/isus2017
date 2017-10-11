@@ -261,10 +261,14 @@ export class IsusUserServiceProxy {
     /**
      * @return Success
      */
-    moveToMainUserTable(isusUserId: number): Observable<boolean> {
+    moveToMainUserTable(isusUserId: number, login: string, password: string): Observable<boolean> {
         let url_ = this.baseUrl + "/api/services/app/IsusUser/MoveToMainUserTable?";
         if (isusUserId !== undefined)
             url_ += "isusUserId=" + encodeURIComponent("" + isusUserId) + "&"; 
+        if (login !== undefined)
+            url_ += "login=" + encodeURIComponent("" + login) + "&"; 
+        if (password !== undefined)
+            url_ += "password=" + encodeURIComponent("" + password) + "&"; 
         url_ = url_.replace(/[?&]$/, "");
 
         let options_ = {

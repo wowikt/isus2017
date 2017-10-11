@@ -4,12 +4,15 @@ import { IsusUserServiceProxy, IsusUserDto, PagedResultDtoOfIsusUserDto } from '
 import { PagedListingComponentBase, PagedRequestDto } from "shared/paged-listing-component-base";
 import { CreateUserComponent } from "app/users/create-user/create-user.component";
 import { EditUserComponent } from "app/users/edit-user/edit-user.component";
+import { MoveUserToMainListComponent } from "app/users/archive/move-user-to-main-list/move-user-to-main-list.component"
 
 @Component({
     templateUrl: './archived.users.component.html',
     animations: [appModuleAnimation()]
 })
 export class ArchivedUsersComponent extends PagedListingComponentBase<IsusUserDto> {
+
+    @ViewChild('moveUserToMainListModal') moveUserToMainListModal: MoveUserToMainListComponent;
 
     active: boolean = false;
     isusUsers: IsusUserDto[] = [];
@@ -37,13 +40,18 @@ export class ArchivedUsersComponent extends PagedListingComponentBase<IsusUserDt
     }
 
     protected moveUserToMainList(user: IsusUserDto): void {
+        if (!user.accountName || !user.accountPwd) {
+            this.moveUserToMainListModal.show(user.id);
+            return;
+        }
+
         this.isTableLoading = true;
-        this._isusUserService.moveToMainUserTable(user.id)
+        this._isusUserService.moveToMainUserTable(user.id, undefined, undefined)
             .finally(() => {
                 this.isTableLoading = false;
             })
             .subscribe((result: boolean) => {
-                this.getDataPage(this.pageNumber);
+                this.refresh();
             });
     }
 }

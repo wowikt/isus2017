@@ -1,4 +1,4 @@
-﻿import { AppComponentBase } from "shared/app-component-base";
+import { AppComponentBase } from "shared/app-component-base";
 import { Injector, OnInit } from '@angular/core';
 
 export class PagedResultDto {
@@ -37,6 +37,9 @@ export abstract class PagedListingComponentBase<EntityDto> extends AppComponentB
 
     public showPaging(result: PagedResultDto, pageNumber: number): void {
         this.totalPages = ((result.totalCount - (result.totalCount % this.pageSize)) / this.pageSize) + 1;
+        if (pageNumber > this.totalPages) {
+            pageNumber = this.totalPages;
+        }
 
         this.totalItems = result.totalCount;
         this.pageNumber = pageNumber;
